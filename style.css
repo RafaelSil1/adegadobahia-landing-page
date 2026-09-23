@@ -197,15 +197,74 @@ nav a.active {
   margin-bottom: 2rem;
 }
 
-/* Galeria de Fotos */
 .galeria {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  touch-action: pan-y; /* Melhora a sensibilidade do gesto no celular */
+}
+
+/* Esconde todas as imagens por padrão */
+.galeria img {
+  display: none;
+  width: 280px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  /* Transição suave de opacidade e movimento */
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Mostra apenas as imagens ativas com animação */
+.galeria img.ativa {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- BOTÕES PERSONALIZADOS --- */
+#prev, #next {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%; /* Torna os botões redondos */
+  border: none;
+  background-color: var( --primary-color); /* Azul moderno */
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse por cima dos botões */
+#prev:hover, #next:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px); /* Leve elevação */
+  box-shadow: 0 6px 14px rgba(0, 86, 179, 0.4);
+}
+
+/* Efeito ao clicar nos botões */
+#prev:active, #next:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.galerya {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.2rem;
   margin-bottom: 2.5rem;
 }
 
-.galeria img {
+.galerya img {
   width: 100%;
   height: 200px;
   object-fit: cover;

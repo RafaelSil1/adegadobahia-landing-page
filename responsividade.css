@@ -138,6 +138,21 @@
     bottom: 15px;
     font-size: 0.75rem;
   }
+
+  /* Esconde as setas de navegação no celular */
+  #prev, #next {
+    display: none;
+  }
+
+  .galeria {
+    gap: 0;
+  }
+
+  .galeria img {
+    width: 100%;
+    max-width: 320px; /* Largura ideal da imagem única no mobile */
+    height: 220px;
+  }
 }
 
 
@@ -152,7 +167,7 @@
     padding: 0 1rem;
   }
 
-  .galeria {
+  .galerya {
     grid-template-columns: 1fr;
   }
 

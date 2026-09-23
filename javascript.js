@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      3. ANIMAÇÃO SUAVE DE ENTRADA CONFORME ROLA A TELA (SCROLL REVEAL)
      ========================================================================== */
-  const elementosAnimados = document.querySelectorAll('.card, .detalhes, .galeria img');
+  const elementosAnimados = document.querySelectorAll('.card, .detalhes, .galerya img');
 
   elementosAnimados.forEach(el => {
     el.style.opacity = '0';
