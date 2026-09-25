@@ -200,7 +200,6 @@ nav a.active {
 .galeria {
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
   gap: 1.2rem;
   margin-bottom: 2rem;
@@ -228,31 +227,7 @@ nav a.active {
   transform: scale(1);
 }
 
-/* Container das bolinhas */
-.indicadores {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-}
 
-/* Estilo individual de cada ponto */
-.dot {
-  width: 10px;
-  height: 10px;
-  background-color: #ccc;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-/* Ponto ativo (imagem atual) */
-.dot.ativo {
-  background-color: #5d1522; /* Use a cor temática do seu site */
-  width: 12px;
-  height: 12px;
-}
 
 /* --- BOTÕES PERSONALIZADOS --- */
 #prev, #next {
