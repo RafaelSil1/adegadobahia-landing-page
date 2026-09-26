@@ -4,11 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
      1. MENU ATIVO AUTOMÁTICO
      ========================================================================== */
   const linksNav = document.querySelectorAll('nav a');
-  const paginaAtual = window.location.pathname.split('/').pop() || 'index.html';
+  let paginaAtual = window.location.pathname.split('/').pop();
+  if (!paginaAtual || paginaAtual === '') {
+    paginaAtual = 'index.html';
+  }
 
   linksNav.forEach(link => {
     const linkPagina = link.getAttribute('href');
-    if (linkPagina === paginaAtual) {
+    if (linkPagina === paginaAtual || (paginaAtual === 'index.html' && linkPagina === '/')) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
@@ -51,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fotosGaleria.forEach(img => {
       img.style.cursor = 'pointer';
       img.addEventListener('click', (e) => {
+        // Não abre o zoom se for um evento derivado de swipe recente
+        if (window.isSwiping) return;
+        
         e.stopPropagation();
         imgAmpliada.src = img.src;
         imgAmpliada.alt = img.alt;
@@ -66,7 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      3. ANIMAÇÃO SUAVE DE ENTRADA (SCROLL REVEAL)
      ========================================================================== */
-  const elementosAnimados = document.querySelectorAll('.card, .detalhes, .galerya img');
+  // CORRIGIDO: .galerya para .galeria
+  const elementosAnimados = document.querySelectorAll('.card, .detalhes, .galeria img');
 
   if (elementosAnimados.length > 0) {
     elementosAnimados.forEach(el => {
@@ -87,163 +94,158 @@ document.addEventListener('DOMContentLoaded', () => {
     elementosAnimados.forEach(el => observer.observe(el));
   }
 
+  /* ==========================================================================
+     4. TRANSIÇÃO AUTOMÁTICA DO BANNER (SOMENTE LEITURA / SEM GESTOS)
+     ========================================================================== */
+  const heroMosaico = document.querySelector('.hero-mosaico');
+  const itensMosaico = document.querySelectorAll('.mosaico-item');
 
-/* ==========================================================================
-   4. TRANSIÇÃO AUTOMÁTICA DO BANNER (SOMENTE LEITURA / SEM GESTOS)
-   ========================================================================== */
-const heroMosaico = document.querySelector('.hero-mosaico');
-const itensMosaico = document.querySelectorAll('.mosaico-item');
+  if (heroMosaico && itensMosaico.length > 0) {
+    let indiceMosaico = 0;
+    const tempoTransicao = 3000;
 
-const isMobile = window.innerWidth <= 768;
-
-if (heroMosaico && itensMosaico.length > 0 && isMobile) {
-  let indiceMosaico = 0;
-  const tempoTransicao = 3000;
-
-  // 1. DESATIVA O ARRASTO DAS IMAGENS E ITENS
-  itensMosaico.forEach(item => {
-    item.style.userSelect = 'none';
-    item.style.webkitUserDrag = 'none';
-    
-    item.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
-    item.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
-  });
-
-  // 2. DESATIVA O TOQUE APENAS PARA ARRASTO (Sem usar pointer-events: none)
-  heroMosaico.style.touchAction = 'none';
-
-  // 3. FUNÇÃO QUE FAZ A TROCA DAS IMAGENS MOVENDO A ROLAGEM DO CONTAINER
-  function proximaImagemMosaico() {
-    indiceMosaico = (indiceMosaico + 1) % itensMosaico.length;
-    
-    // Pega a largura exata de um item para calcular a rolagem
-    const larguraItem = itensMosaico[0].clientWidth;
-
-    heroMosaico.scrollTo({
-      left: indiceMosaico * larguraItem,
-      behavior: 'smooth'
-    });
-  }
-  
-    // 4. INICIA O LOOP AUTOMÁTICO
-  setInterval(proximaImagemMosaico, tempoTransicao);
-}
-
-
-
-const botaonext = document.getElementById("next");
-const botaoprev = document.getElementById("prev");
-const galeria = document.querySelector(".galeria");
-const imagens = document.querySelectorAll(".galeria img");
-const containerIndicadores = document.getElementById("indicadores");
-
-if (galeria && imagens.length > 0) {
-  let indiceAtual = 0;
-
-  function getQuantidadesVisual() {
-    return window.innerWidth <= 768 ? 1 : 3;
-  }
-
-  function criarIndicadores() {
-    if (!containerIndicadores) return;
-    containerIndicadores.innerHTML = "";
-
-    imagens.forEach((_, index) => {
-      const dot = document.createElement("span");
-      dot.classList.add("dot");
-      if (index === 0) dot.classList.add("ativo");
+    itensMosaico.forEach(item => {
+      item.style.userSelect = 'none';
+      item.style.webkitUserDrag = 'none';
       
-      dot.addEventListener("click", () => {
-        indiceAtual = index;
-        mudarImagemGaleria();
+      item.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+      item.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
+    });
+
+    heroMosaico.style.touchAction = 'none';
+
+    function proximaImagemMosaico() {
+      if (window.innerWidth > 768) return; // Executa só no mobile
+
+      indiceMosaico = (indiceMosaico + 1) % itensMosaico.length;
+      const larguraItem = itensMosaico[0].clientWidth;
+
+      heroMosaico.scrollTo({
+        left: indiceMosaico * larguraItem,
+        behavior: 'smooth'
       });
-
-      containerIndicadores.appendChild(dot);
-    });
-  }
-
-  function mudarImagemGaleria() {
-    const quantidadesVisual = getQuantidadesVisual();
-
-    if (indiceAtual > imagens.length - quantidadesVisual) {
-      indiceAtual = Math.max(0, imagens.length - quantidadesVisual);
     }
 
-    imagens.forEach(img => img.classList.remove("ativa"));
+    setInterval(proximaImagemMosaico, tempoTransicao);
+  }
 
-    for (let i = 0; i < quantidadesVisual; i++) {
-      const indiceExibir = indiceAtual + i;
-      if (imagens[indiceExibir]) {
-        imagens[indiceExibir].classList.add("ativa");
+  /* ==========================================================================
+     5. CONTROLE DA GALERIA (BOTÕES, INDICADORES E SWIPE)
+     ========================================================================== */
+  const botaonext = document.getElementById("next");
+  const botaoprev = document.getElementById("prev");
+  const galeria = document.querySelector(".galeria");
+  const imagens = document.querySelectorAll(".galeria img");
+  const containerIndicadores = document.getElementById("indicadores");
+
+  if (galeria && imagens.length > 0) {
+    let indiceAtual = 0;
+
+    function getQuantidadesVisual() {
+      return window.innerWidth <= 768 ? 1 : 3;
+    }
+
+    function criarIndicadores() {
+      if (!containerIndicadores) return;
+      containerIndicadores.innerHTML = "";
+
+      imagens.forEach((_, index) => {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        if (index === 0) dot.classList.add("ativo");
+        
+        dot.addEventListener("click", () => {
+          indiceAtual = index;
+          mudarImagemGaleria();
+        });
+
+        containerIndicadores.appendChild(dot);
+      });
+    }
+
+    function mudarImagemGaleria() {
+      const quantidadesVisual = getQuantidadesVisual();
+
+      if (indiceAtual > imagens.length - quantidadesVisual) {
+        indiceAtual = Math.max(0, imagens.length - quantidadesVisual);
       }
+
+      imagens.forEach(img => img.classList.remove("ativa"));
+
+      for (let i = 0; i < quantidadesVisual; i++) {
+        const indiceExibir = indiceAtual + i;
+        if (imagens[indiceExibir]) {
+          imagens[indiceExibir].classList.add("ativa");
+        }
+      }
+
+      const dots = document.querySelectorAll(".dot");
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle("ativo", idx === indiceAtual);
+      });
     }
 
-    const dots = document.querySelectorAll(".dot");
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle("ativo", idx === indiceAtual);
-    });
-  }
-
-  function proximaImagemGaleria() {
-    const quantidadesVisual = getQuantidadesVisual();
-    if (indiceAtual >= imagens.length - quantidadesVisual) {
-      indiceAtual = 0;
-    } else {
-      indiceAtual++;
+    function proximaImagemGaleria() {
+      const quantidadesVisual = getQuantidadesVisual();
+      if (indiceAtual >= imagens.length - quantidadesVisual) {
+        indiceAtual = 0;
+      } else {
+        indiceAtual++;
+      }
+      mudarImagemGaleria();
     }
+
+    function imagemAnteriorGaleria() {
+      const quantidadesVisual = getQuantidadesVisual();
+      if (indiceAtual === 0) {
+        indiceAtual = imagens.length - quantidadesVisual;
+      } else {
+        indiceAtual--;
+      }
+      mudarImagemGaleria();
+    }
+
+    // --- TOUCH SWIPE ---
+    let startX = 0;
+    let endX = 0;
+    const sensibilidade = 50;
+
+    galeria.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      window.isSwiping = false;
+    }, { passive: true });
+
+    galeria.addEventListener("touchend", (e) => {
+      endX = e.changedTouches[0].clientX;
+      processarSwipe();
+    }, { passive: true });
+
+    function processarSwipe() {
+      const distancia = startX - endX;
+
+      if (Math.abs(distancia) > sensibilidade) {
+        window.isSwiping = true;
+        setTimeout(() => { window.isSwiping = false; }, 300);
+
+        if (distancia > sensibilidade) {
+          proximaImagemGaleria();
+        } else if (distancia < -sensibilidade) {
+          imagemAnteriorGaleria();
+        }
+      }
+
+      startX = 0;
+      endX = 0;
+    }
+
+    if (botaonext) botaonext.addEventListener("click", proximaImagemGaleria);
+    if (botaoprev) botaoprev.addEventListener("click", imagemAnteriorGaleria);
+
+    window.addEventListener("resize", mudarImagemGaleria);
+
+    criarIndicadores();
     mudarImagemGaleria();
   }
-
-  function imagemAnteriorGaleria() {
-    const quantidadesVisual = getQuantidadesVisual();
-    if (indiceAtual === 0) {
-      indiceAtual = imagens.length - quantidadesVisual;
-    } else {
-      indiceAtual--;
-    }
-    mudarImagemGaleria();
-  }
-
-  // --- TOUCH SWIPE (Exclusivo para dispositivos móveis) ---
-  let startX = 0;
-  let endX = 0;
-  const sensibilidade = 50; // Mínimo de deslocamento em px para ativar o swipe
-
-  galeria.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-
-  galeria.addEventListener("touchend", (e) => {
-    endX = e.changedTouches[0].clientX;
-    processarSwipe();
-  }, { passive: true });
-
-  function processarSwipe() {
-    const distancia = startX - endX;
-
-    if (distancia > sensibilidade) {
-      proximaImagemGaleria();
-    } else if (distancia < -sensibilidade) {
-      imagemAnteriorGaleria();
-    }
-    
-    startX = 0;
-    endX = 0;
-  }
-  // --------------------------------------------------------
-
-  // Ações de clique nos botões
-  if (botaonext) botaonext.addEventListener("click", proximaImagemGaleria);
-  if (botaoprev) botaoprev.addEventListener("click", imagemAnteriorGaleria);
-
-  // Reorganiza as imagens ao redimensionar a janela
-  window.addEventListener("resize", mudarImagemGaleria);
-
-  // Inicializa a exibição e os indicadores
-  criarIndicadores();
-  mudarImagemGaleria();
-}
-
 
   /* ==========================================================================
      6. MENU HAMBÚRGUER (MOBILE)
