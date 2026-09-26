@@ -87,7 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
     elementosAnimados.forEach(el => observer.observe(el));
   }
 
-  /* ==========================================================================
+
+  // 4. INICIA O LOOP AUTOMÁTICO
+  setInterval(proximaImagemMosaico, tempoTransicao);
+}
+
+
+/* ==========================================================================
    4. TRANSIÇÃO AUTOMÁTICA DO BANNER (SOMENTE LEITURA / SEM GESTOS)
    ========================================================================== */
 const heroMosaico = document.querySelector('.hero-mosaico');
@@ -102,31 +108,31 @@ if (heroMosaico && itensMosaico.length > 0 && isMobile) {
   // 1. DESATIVA O ARRASTO DAS IMAGENS E ITENS
   itensMosaico.forEach(item => {
     item.style.userSelect = 'none';
-    item.style.webkitUserDrag = 'none'; // Impede o arrasto nativo da imagem no navegador
+    item.style.webkitUserDrag = 'none';
     
-    // Bloqueia eventos diretamente nos itens individuais para não dar a "forçada"
     item.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
     item.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
   });
 
-  // 2. BLOQUEIO ABSOLUTO NO CONTAINER PRINCIPAL
+  // 2. DESATIVA O TOQUE APENAS PARA ARRASTO (Sem usar pointer-events: none)
   heroMosaico.style.touchAction = 'none';
-  heroMosaico.style.pointerEvents = 'none'; // IMPEDE QUALQUER INTERAÇÃO DE TOQUE/CLIQUE NO MOBILE
 
-  // 3. FUNÇÃO QUE FAZ A TROCA DAS IMAGENS
+  // 3. FUNÇÃO QUE FAZ A TROCA DAS IMAGENS MOVENDO A ROLAGEM DO CONTAINER
   function proximaImagemMosaico() {
     indiceMosaico = (indiceMosaico + 1) % itensMosaico.length;
-    const deslocamento = indiceMosaico * 100;
+    
+    // Pega a largura exata de um item para calcular a rolagem
+    const larguraItem = itensMosaico[0].clientWidth;
 
-    itensMosaico.forEach(item => {
-      item.style.transform = `translateX(-${deslocamento}%)`;
+    heroMosaico.scrollTo({
+      left: indiceMosaico * larguraItem,
+      behavior: 'smooth'
     });
   }
 
   // 4. INICIA O LOOP AUTOMÁTICO
   setInterval(proximaImagemMosaico, tempoTransicao);
 }
-
 
 
 
