@@ -130,11 +130,6 @@ if (heroMosaico && itensMosaico.length > 0 && isMobile) {
     });
   }
 
-  // 4. INICIA O LOOP AUTOMÁTICO
-  setInterval(proximaImagemMosaico, tempoTransicao);
-}
-
-
 
 const botaonext = document.getElementById("next");
 const botaoprev = document.getElementById("prev");
