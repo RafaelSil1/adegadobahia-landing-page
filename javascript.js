@@ -88,11 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // 4. INICIA O LOOP AUTOMÁTICO
-  setInterval(proximaImagemMosaico, tempoTransicao);
-}
-
-
 /* ==========================================================================
    4. TRANSIÇÃO AUTOMÁTICA DO BANNER (SOMENTE LEITURA / SEM GESTOS)
    ========================================================================== */
@@ -129,6 +124,11 @@ if (heroMosaico && itensMosaico.length > 0 && isMobile) {
       behavior: 'smooth'
     });
   }
+  
+    // 4. INICIA O LOOP AUTOMÁTICO
+  setInterval(proximaImagemMosaico, tempoTransicao);
+}
+
 
 
 const botaonext = document.getElementById("next");
