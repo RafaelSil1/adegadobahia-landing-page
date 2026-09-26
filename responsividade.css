@@ -111,30 +111,35 @@
     padding: 1.2rem;
   }
 
-  /* Mosaico Principal do Banner (Carrossel Horizontal no Celular) */
-  .hero-mosaico {
-    height: 320px;
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    /* SÓ bloqueia o toque no celular/tablet (até 768px) */
-    touch-action: none;
-    user-select: none;
-    -webkit-user-select: none;
-  }
+ /* Mosaico Principal do Banner (Carrossel Horizontal no Celular) */
+.hero-mosaico {
+  height: 320px;
+  display: flex;
+  flex-direction: row;
+  
+  /* REMOVIDOS: overflow-x: auto, scroll-snap-type e -webkit-overflow-scrolling */
+  /* Adicionados para travar totalmente o arrasto: */
+  overflow: hidden !important; /* Impede a barra e o movimento de rolagem */
+  pointer-events: none;        /* Faz o toque do dedo ignorar o carrossel (sem trancos) */
+  touch-action: none;          /* Cancela gestos padrão do navegador */
+  
+  user-select: none;
+  -webkit-user-select: none;
+}
 
-  .mosaico-item {
-    flex: 0 0 100%;
-    width: 100%;
-    height: 100%;
-    scroll-snap-align: start;
-    filter: brightness(0.5); /* Mantém fundo escuro para realçar texto */
-    background-size: cover;
-    background-position: center;
-  }
+.mosaico-item {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  /* REMOVIDO: scroll-snap-align: start; */
+  filter: brightness(0.5); /* Mantém fundo escuro para realçar texto */
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease-in-out; /* Garante que a transição via JS seja suave */
+  
+  -webkit-user-drag: none; /* Impede que o navegador tente arrastar a imagem */
+}
+
 
   .mosaico-item span {
     position: absolute;
