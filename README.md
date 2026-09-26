@@ -1,6 +1,6 @@
 # 🍷 Adega do Bahia - Landing Page
 
-![Preview do Projeto](<img width="1350" height="767" alt="img-projeto-adegadobahia" src="https://github.com/user-attachments/assets/8f0517b1-45fd-40cb-95a4-4f842519f962" />)
+![Preview do Projeto](https://github.com/user-attachments/assets/8f0517b1-45fd-40cb-95a4-4f842519f962)
 
 > **Status do Projeto:** 🟢 Concluído / Online  
 > 🔗 **Acesse o site:** [Adega do Bahia - GitHub Pages](https://adegadobahia.pages.dev/)
