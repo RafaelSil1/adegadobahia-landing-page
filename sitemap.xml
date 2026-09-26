@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Página Inicial -->
   <url>
     <loc>https://adegadobahia.pages.dev/</loc>
     <lastmod>2026-03-01</lastmod>
@@ -9,7 +8,6 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Salão -->
   <url>
     <loc>https://adegadobahia.pages.dev/salao.html</loc>
     <lastmod>2026-03-01</lastmod>
@@ -17,7 +15,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Praia -->
   <url>
     <loc>https://adegadobahia.pages.dev/praia.html</loc>
     <lastmod>2026-03-01</lastmod>
@@ -25,7 +22,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Adega -->
   <url>
     <loc>https://adegadobahia.pages.dev/adega.html</loc>
     <lastmod>2026-03-01</lastmod>
