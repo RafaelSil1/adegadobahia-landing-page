@@ -88,29 +88,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     4. TRANSIÇÃO AUTOMÁTICA DO BANNER (SOMENTE LEITURA / SEM GESTOS)
-     ========================================================================== */
-  const heroMosaico = document.querySelector('.hero-mosaico');
-  const itensMosaico = document.querySelectorAll('.mosaico-item');
+   4. TRANSIÇÃO AUTOMÁTICA DO BANNER (SOMENTE LEITURA / SEM GESTOS)
+   ========================================================================== */
+const heroMosaico = document.querySelector('.hero-mosaico');
+const itensMosaico = document.querySelectorAll('.mosaico-item');
 
-  // Roda a troca automática apenas em telas mobile (<= 768px)
-  const isMobile = window.innerWidth <= 768;
+// Roda a troca automática apenas em telas mobile (<= 768px)
+const isMobile = window.innerWidth <= 768;
 
-  if (heroMosaico && itensMosaico.length > 0 && isMobile) {
-    let indiceMosaico = 0;
+if (heroMosaico && itensMosaico.length > 0 && isMobile) {
+  let indiceMosaico = 0;
+  const tempoTransicao = 3000; // Tempo em milissegundos entre as trocas (ex: 3 segundos)
 
-    function proximaImagemMosaico() {
-      indiceMosaico = (indiceMosaico + 1) % itensMosaico.length;
-      const deslocamento = indiceMosaico * 100;
+  // 1. DESATIVA QUALQUER GESTO DE TOQUE E SELEÇÃO NO CONTAINER
+  heroMosaico.style.touchAction = 'none';
+  heroMosaico.style.userSelect = 'none';
+  heroMosaico.style.webkitUserSelect = 'none';
 
-      itensMosaico.forEach(item => {
-        item.style.transform = `translateX(-${deslocamento}%)`;
-      });
-    }
+  // Preventivo extra: Bloqueia eventos de arrasto via toque
+  const bloquearGesto = (e) => e.preventDefault();
+  heroMosaico.addEventListener('touchstart', bloquearGesto, { passive: false });
+  heroMosaico.addEventListener('touchmove', bloquearGesto, { passive: false });
+  heroMosaico.addEventListener('touchend', bloquearGesto, { passive: false });
 
+  // 2. FUNÇÃO QUE FAZ A TROCA DAS IMAGENS
+  function proximaImagemMosaico() {
+    indiceMosaico = (indiceMosaico + 1) % itensMosaico.length;
+    const deslocamento = indiceMosaico * 100;
 
-    setInterval(proximaImagemMosaico, 2500);
+    itensMosaico.forEach(item => {
+      item.style.transform = `translateX(-${deslocamento}%)`;
+    });
   }
+
+  // 3.INICIA O LOOP AUTOMÁTICO
+  setInterval(proximaImagemMosaico, tempoTransicao);
+}
+
 
 
 const botaonext = document.getElementById("next");
