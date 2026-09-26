@@ -93,25 +93,27 @@ document.addEventListener('DOMContentLoaded', () => {
 const heroMosaico = document.querySelector('.hero-mosaico');
 const itensMosaico = document.querySelectorAll('.mosaico-item');
 
-// Roda a troca automática apenas em telas mobile (<= 768px)
 const isMobile = window.innerWidth <= 768;
 
 if (heroMosaico && itensMosaico.length > 0 && isMobile) {
   let indiceMosaico = 0;
-  const tempoTransicao = 3000; // Tempo em milissegundos entre as trocas (ex: 3 segundos)
+  const tempoTransicao = 3000;
 
-  // 1. DESATIVA QUALQUER GESTO DE TOQUE E SELEÇÃO NO CONTAINER
+  // 1. DESATIVA O ARRASTO DAS IMAGENS E ITENS
+  itensMosaico.forEach(item => {
+    item.style.userSelect = 'none';
+    item.style.webkitUserDrag = 'none'; // Impede o arrasto nativo da imagem no navegador
+    
+    // Bloqueia eventos diretamente nos itens individuais para não dar a "forçada"
+    item.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+    item.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: true });
+  });
+
+  // 2. BLOQUEIO ABSOLUTO NO CONTAINER PRINCIPAL
   heroMosaico.style.touchAction = 'none';
-  heroMosaico.style.userSelect = 'none';
-  heroMosaico.style.webkitUserSelect = 'none';
+  heroMosaico.style.pointerEvents = 'none'; // IMPEDE QUALQUER INTERAÇÃO DE TOQUE/CLIQUE NO MOBILE
 
-  // Preventivo extra: Bloqueia eventos de arrasto via toque
-  const bloquearGesto = (e) => e.preventDefault();
-  heroMosaico.addEventListener('touchstart', bloquearGesto, { passive: false });
-  heroMosaico.addEventListener('touchmove', bloquearGesto, { passive: false });
-  heroMosaico.addEventListener('touchend', bloquearGesto, { passive: false });
-
-  // 2. FUNÇÃO QUE FAZ A TROCA DAS IMAGENS
+  // 3. FUNÇÃO QUE FAZ A TROCA DAS IMAGENS
   function proximaImagemMosaico() {
     indiceMosaico = (indiceMosaico + 1) % itensMosaico.length;
     const deslocamento = indiceMosaico * 100;
@@ -121,9 +123,10 @@ if (heroMosaico && itensMosaico.length > 0 && isMobile) {
     });
   }
 
-  // 3.INICIA O LOOP AUTOMÁTICO
+  // 4. INICIA O LOOP AUTOMÁTICO
   setInterval(proximaImagemMosaico, tempoTransicao);
 }
+
 
 
 
