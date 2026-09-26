@@ -157,21 +157,24 @@
 }
 
 .hero-overlay {
-  position: absolute; /* Garante que o overlay fique por cima do carrossel sem empurrar o layout */
-  top: 40%;
+  position: absolute; /* Garante que o título e a descrição flutuem sobre o carrossel */
+  top: 35%; /* Ajusta a altura na tela */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Centraliza na tela */
   width: 90%;
-  z-index: 5; /* Fica acima da foto, mas abaixo do span da imagem */
-  pointer-events: none; /* Evita interferir na interação do carrossel */
+  text-align: center;
+  z-index: 20; /* Garante que fique POR CIMA de todas as 3 imagens */
+  pointer-events: none; /* Impede que o texto atrapalhe a navegação */
 }
 
 .hero-overlay h2 {
   font-size: 1.6rem;
+  color: #ffffff;
 }
 
 .hero-overlay p {
   font-size: 0.95rem;
+  color: #ffffff;
 }
 
 
