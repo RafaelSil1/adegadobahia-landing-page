@@ -116,28 +116,42 @@
    MOBILE (ATÉ 768px - BANNER CARROSSEL AUTOMÁTICO)
    ========================================================================== */
   
-/* 1. Adicionado o ponto (.) no início da classe */
-.hero-mosaico {
-  position: relative; /* Importante para alinhar overlays/itens internos */
+/* Container Pai que segura o carrossel e o texto fixo */
+.hero-container {
+  position: relative;
+  width: 100%;
   height: 320px;
+  overflow: hidden;
+}
+
+/* O Carrossel que o JS faz rolar */
+.hero-mosaico {
+  height: 100%;
   display: flex;
   flex-direction: row;
-  overflow: hidden !important;
+  overflow-x: auto; /* Permite o scrollTo do JS */
+  scroll-behavior: smooth;
   pointer-events: none;
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
+  /* Esconde a barra de rolagem no mobile */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE e Edge */
+}
+
+.hero-mosaico::-webkit-scrollbar {
+  display: none; /* Chrome, Safari e Opera */
 }
 
 .mosaico-item {
-  position: relative; /* Garante que o span fique preso à sua respectiva imagem */
+  position: relative;
   flex: 0 0 100%;
   width: 100%;
   height: 100%;
   filter: brightness(0.55);
   background-size: cover;
   background-position: center;
-  transition: transform 0.6s ease-in-out;
   -webkit-user-drag: none;
 }
 
@@ -152,30 +166,32 @@
   color: #ffffff;
   border-radius: 12px;
   white-space: nowrap;
-  /* z-index alto para garantir que fique acima da imagem e do overlay se cruzarem */
-  z-index: 10; 
+  z-index: 3;
 }
 
+/* TEXTO FIXO - Fica flutuando acima do carrossel e NUNCA rola com o JS */
 .hero-overlay {
-  position: absolute; /* Garante que o título e a descrição flutuem sobre o carrossel */
-  top: 35%; /* Ajusta a altura na tela */
+  position: absolute;
+  top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centraliza na tela */
+  transform: translate(-50%, -50%);
   width: 90%;
   text-align: center;
-  z-index: 20; /* Garante que fique POR CIMA de todas as 3 imagens */
-  pointer-events: none; /* Impede que o texto atrapalhe a navegação */
+  z-index: 10; /* Garante que fique em cima de qualquer imagem que passar */
+  pointer-events: none;
 }
 
 .hero-overlay h2 {
   font-size: 1.6rem;
   color: #ffffff;
+  margin-bottom: 5px;
 }
 
 .hero-overlay p {
   font-size: 0.95rem;
   color: #ffffff;
 }
+
 
 
   /* Galeria de Fotos e Navegação Mobile */
