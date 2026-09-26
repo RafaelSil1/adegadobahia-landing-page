@@ -112,93 +112,120 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(proximaImagemMosaico, 2500);
   }
 
-  /* ==========================================================================
-     5. GALERIA COM NAVEGAÇÃO POR BOTÕES E INDICADORES (SEM TOUCH/SWIPE)
-     ========================================================================== */
-  const botaonext = document.getElementById("next");
-  const botaoprev = document.getElementById("prev");
-  const galeria = document.querySelector(".galeria");
-  const imagens = document.querySelectorAll(".galeria img");
-  const containerIndicadores = document.getElementById("indicadores");
 
-  if (galeria && imagens.length > 0) {
-    let indiceAtual = 0;
+const botaonext = document.getElementById("next");
+const botaoprev = document.getElementById("prev");
+const galeria = document.querySelector(".galeria");
+const imagens = document.querySelectorAll(".galeria img");
+const containerIndicadores = document.getElementById("indicadores");
 
-    function getQuantidadesVisual() {
-      return window.innerWidth <= 768 ? 1 : 3;
-    }
+if (galeria && imagens.length > 0) {
+  let indiceAtual = 0;
 
-    function criarIndicadores() {
-      if (!containerIndicadores) return;
-      containerIndicadores.innerHTML = "";
+  function getQuantidadesVisual() {
+    return window.innerWidth <= 768 ? 1 : 3;
+  }
 
-      imagens.forEach((_, index) => {
-        const dot = document.createElement("span");
-        dot.classList.add("dot");
-        if (index === 0) dot.classList.add("ativo");
-        
-        dot.addEventListener("click", () => {
-          indiceAtual = index;
-          mudarImagemGaleria();
-        });
+  function criarIndicadores() {
+    if (!containerIndicadores) return;
+    containerIndicadores.innerHTML = "";
 
-        containerIndicadores.appendChild(dot);
+    imagens.forEach((_, index) => {
+      const dot = document.createElement("span");
+      dot.classList.add("dot");
+      if (index === 0) dot.classList.add("ativo");
+      
+      dot.addEventListener("click", () => {
+        indiceAtual = index;
+        mudarImagemGaleria();
       });
+
+      containerIndicadores.appendChild(dot);
+    });
+  }
+
+  function mudarImagemGaleria() {
+    const quantidadesVisual = getQuantidadesVisual();
+
+    if (indiceAtual > imagens.length - quantidadesVisual) {
+      indiceAtual = Math.max(0, imagens.length - quantidadesVisual);
     }
 
-    function mudarImagemGaleria() {
-      const quantidadesVisual = getQuantidadesVisual();
+    imagens.forEach(img => img.classList.remove("ativa"));
 
-      if (indiceAtual > imagens.length - quantidadesVisual) {
-        indiceAtual = Math.max(0, imagens.length - quantidadesVisual);
+    for (let i = 0; i < quantidadesVisual; i++) {
+      const indiceExibir = indiceAtual + i;
+      if (imagens[indiceExibir]) {
+        imagens[indiceExibir].classList.add("ativa");
       }
-
-      imagens.forEach(img => img.classList.remove("ativa"));
-
-      for (let i = 0; i < quantidadesVisual; i++) {
-        const indiceExibir = indiceAtual + i;
-        if (imagens[indiceExibir]) {
-          imagens[indiceExibir].classList.add("ativa");
-        }
-      }
-
-      const dots = document.querySelectorAll(".dot");
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle("ativo", idx === indiceAtual);
-      });
     }
 
-    function proximaImagemGaleria() {
-      const quantidadesVisual = getQuantidadesVisual();
-      if (indiceAtual >= imagens.length - quantidadesVisual) {
-        indiceAtual = 0;
-      } else {
-        indiceAtual++;
-      }
-      mudarImagemGaleria();
+    const dots = document.querySelectorAll(".dot");
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("ativo", idx === indiceAtual);
+    });
+  }
+
+  function proximaImagemGaleria() {
+    const quantidadesVisual = getQuantidadesVisual();
+    if (indiceAtual >= imagens.length - quantidadesVisual) {
+      indiceAtual = 0;
+    } else {
+      indiceAtual++;
     }
-
-    function imagemAnteriorGaleria() {
-      const quantidadesVisual = getQuantidadesVisual();
-      if (indiceAtual === 0) {
-        indiceAtual = imagens.length - quantidadesVisual;
-      } else {
-        indiceAtual--;
-      }
-      mudarImagemGaleria();
-    }
-
-    // Ações de clique nos botões
-    if (botaonext) botaonext.addEventListener("click", proximaImagemGaleria);
-    if (botaoprev) botaoprev.addEventListener("click", imagemAnteriorGaleria);
-
-    // Reorganiza as imagens ao redimensionar a janela
-    window.addEventListener("resize", mudarImagemGaleria);
-
-    // Inicializa a exibição e os indicadores
-    criarIndicadores();
     mudarImagemGaleria();
   }
+
+  function imagemAnteriorGaleria() {
+    const quantidadesVisual = getQuantidadesVisual();
+    if (indiceAtual === 0) {
+      indiceAtual = imagens.length - quantidadesVisual;
+    } else {
+      indiceAtual--;
+    }
+    mudarImagemGaleria();
+  }
+
+  // --- TOUCH SWIPE (Exclusivo para dispositivos móveis) ---
+  let startX = 0;
+  let endX = 0;
+  const sensibilidade = 50; // Mínimo de deslocamento em px para ativar o swipe
+
+  galeria.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  galeria.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    processarSwipe();
+  }, { passive: true });
+
+  function processarSwipe() {
+    const distancia = startX - endX;
+
+    if (distancia > sensibilidade) {
+      proximaImagemGaleria();
+    } else if (distancia < -sensibilidade) {
+      imagemAnteriorGaleria();
+    }
+    
+    startX = 0;
+    endX = 0;
+  }
+  // --------------------------------------------------------
+
+  // Ações de clique nos botões
+  if (botaonext) botaonext.addEventListener("click", proximaImagemGaleria);
+  if (botaoprev) botaoprev.addEventListener("click", imagemAnteriorGaleria);
+
+  // Reorganiza as imagens ao redimensionar a janela
+  window.addEventListener("resize", mudarImagemGaleria);
+
+  // Inicializa a exibição e os indicadores
+  criarIndicadores();
+  mudarImagemGaleria();
+}
+
 
   /* ==========================================================================
      6. MENU HAMBÚRGUER (MOBILE)
