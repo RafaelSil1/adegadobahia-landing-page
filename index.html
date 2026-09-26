@@ -70,7 +70,10 @@
     Adega do Bahia e Espaços de Lazer
   </h1>
 
-  <!-- Banner Principal em Mosaico -->
+  <!-- Envolva a section e o overlay em um container pai -->
+<div class="hero-container">
+
+  <!-- Carrossel (apenas as imagens e os spans) -->
   <section class="hero-mosaico" aria-label="Apresentação dos Espaços">
     <div class="mosaico-item" style="background-image: url('imagens/salao.jpeg');" role="img" aria-label="Salão de Festas do Bahia">
       <span>Salão de Festas</span>
@@ -81,11 +84,16 @@
     <div class="mosaico-item" style="background-image: url('imagens/adega.jpeg');" role="img" aria-label="Adega do Bahia">
       <span>Adega do Bahia</span>
     </div>
-    <div class="hero-overlay">
-      <h2>Espaços & Lazer do Bahia</h2>
-      <p>O lugar certo para a sua festa, o seu descanso e as melhores bebidas.</p>
-    </div>
   </section>
+
+  <!-- O Texto Fixo fica AQUI, fora do carrossel que rola -->
+  <div class="hero-overlay">
+    <h2>Espaços & Lazer do Bahia</h2>
+    <p>O lugar certo para a sua festa, o seu descanso e as melhores bebidas.</p>
+  </div>
+
+</div>
+
 
   <!-- Conteúdo Principal / Cartões dos Serviços -->
   <main class="servicos-grid" id="conteudo-principal">
