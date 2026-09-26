@@ -4,20 +4,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salão de Festas na Zona Leste | Adega do Bahia</title>
+  
+  <!-- SEO Básico -->
+  <title>Salão de Festas na Vila Santa Teresinha (Zona Leste SP) | Adega do Bahia</title>
+  <meta name="description" content="Aluguel de salão de festas na Vila Santa Teresinha, Zona Leste de SP. Espaço com churrasqueira, mesas, cadeiras, pebolim e pula-pula para seu evento.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rafaelsil1.github.io/adegadobahia-landing-page/salao.html">
+
+  <!-- Favicon -->
   <link rel="shortcut icon" href="imagens/favicon.jpeg" type="image/x-icon">
+
+  <!-- Open Graph / Redes Sociais e WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Salão de Festas na Vila Santa Teresinha (Zona Leste SP) | Adega do Bahia">
+  <meta property="og:description" content="Espaço ideal para festas familiares e aniversários com churrasqueira, jogos e estrutura completa. Faça sua reserva!">
+  <meta property="og:image" content="imagens/festa-img.jpeg">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Font Awesome & CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="responsividade.css">
 </head>
 
 <body>
 
+  <!-- Cabeçalho e Navegação -->
   <header>
     <div class="logo">
-      <h1>Adega do Bahia & Espaços</h1>
+      <a href="index.html">
+        <img src="imagens/logo.jpg" alt="Logo Adega do Bahia & Espaços" class="logo-desktop">
+        <img src="imagens/logo-versao-mobile.jpg" alt="Logo Adega do Bahia & Espaços" class="logo-mobile">
+      </a>
     </div>
-    <nav>
+
+    <!-- Navegação Desktop -->
+    <nav class="nav-desktop" aria-label="Navegação Principal">
       <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="salao.html" class="active">Salão de Festas</a></li>
+        <li><a href="praia.html">Casa em Itanhaém</a></li>
+        <li><a href="adega.html">Adega</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botão Menu Mobile -->
+    <button class="menu-btn" id="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-menu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <!-- Menu Mobile -->
+    <nav class="nav-menu" id="nav-menu" aria-label="Navegação Mobile">
+      <ul class="ul-list2">
         <li><a href="index.html">Início</a></li>
         <li><a href="salao.html" class="active">Salão de Festas</a></li>
         <li><a href="praia.html">Casa em Itanhaém</a></li>
@@ -26,44 +64,46 @@
     </nav>
   </header>
 
-  <main class="conteudo-pagina">
-    <h2>Salão de Festas - Vila Santa Teresinha (Zona Leste)</h2>
+  <!-- Conteúdo Principal -->
+  <main class="conteudo-pagina" id="conteudo-principal">
+    <h1>Salão de Festas - Vila Santa Teresinha (Zona Leste)</h1>
     <p class="subtitulo">Espaço aconchegante para celebrar com amigos e família.</p>
 
-    <!-- Galeria de Fotos Placeholder -->
-    <section class="galerya">
-      <img src="imagens/festa-img.jpeg" alt="Salão de festas">
-      <img src="imagens/salao.jpeg" alt="Churrasqueira do salão">
-      <img src="imagens/festa.01.jpeg" alt="Mesas e cadeiras">
+    <!-- Galeria de Fotos -->
+    <section class="galerya" aria-label="Galeria de fotos do salão de festas">
+      <img src="imagens/festa-img.jpeg" alt="Visão geral do salão de festas na Vila Santa Teresinha">
+      <img src="imagens/salao.jpeg" alt="Área de churrasqueira equipada do salão de festas">
+      <img src="imagens/festa.01.jpeg" alt="Mesas e cadeiras organizadas para eventos no salão">
     </section>
 
     <!-- Estrutura do Salão -->
-    <section class="detalhes">
-      <h3>O que o espaço oferece:</h3>
+    <section class="detalhes" aria-label="Estrutura e diferenciais do salão">
+      <h2>O que o espaço oferece:</h2>
       <ul>
         <li>Capacidade para confortavelmente acomodar seus convidados</li>
         <li>Churrasqueira equipada</li>
         <li>Jogo de mesas e cadeiras inclusos</li>
-        <li>Cozinha de apoio (geladeira)</li>
-        <li>Excelente localização na Vila Santa Teresinha</li>
-        <li>Trampolim (pula-pula)</li>
-        <li>Mesa de pebolim</li>
+        <li>Cozinha de apoio com geladeira</li>
+        <li>Excelente localização na Vila Santa Teresinha (Zona Leste - SP)</li>
+        <li>Trampolim (pula-pula) para diversão infantil</li>
+        <li>Mesa de pebolim para entretenimento</li>
         <li>Banheiros individuais (masculino e feminino)</li>
       </ul>
 
       <div class="cta-box">
         <h3>Quer consultar datas disponíveis e orçamentos?</h3>
         <a href="https://wa.me/5511988083419?text=Olá!+Gostaria+de+saber+informações+sobre+o+Salão+de+Festas"
-          target="_blank" class="btn btn-whats">Chamar no WhatsApp do Salão</a>
+           target="_blank" rel="noopener noreferrer" class="btn btn-whats">Chamar no WhatsApp do Salão</a>
       </div>
     </section>
   </main>
 
+  <!-- Rodapé -->
   <footer>
     <p>&copy; 2026 Adega do Bahia & Espaços - Todos os direitos reservados.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="javascript.js"></script>
 
 </body>
 

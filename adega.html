@@ -4,20 +4,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adega do Bahia | Vinhos e Bebidas</title>
+  
+  <!-- SEO Básico -->
+  <title>Adega do Bahia na Vila Santa Teresinha | Bebidas Geladas, Tabacaria e Vinhos</title>
+  <meta name="description" content="Adega na Vila Santa Teresinha: cervejas geladas, destilados, whiskies, vinhos, tabacaria, narguilé e carvão. Atendimento local na Rua Quatro de Julho, 55.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rafaelsil1.github.io/adegadobahia-landing-page/adega.html">
+
+  <!-- Favicon -->
   <link rel="shortcut icon" href="imagens/favicon.jpeg" type="image/x-icon">
+
+  <!-- Open Graph / Redes Sociais e WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Adega do Bahia | Bebidas Geladas e Tabacaria na Vila Santa Teresinha">
+  <meta property="og:description" content="Bebidas geladas, combos, essências de narguilé e itens para churrasco. Venha conferir na Vila Santa Teresinha!">
+  <meta property="og:image" content="imagens/imagem-daadega.jpeg">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Font Awesome & CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="responsividade.css">
 </head>
 
 <body>
 
+  <!-- Cabeçalho e Navegação -->
   <header>
     <div class="logo">
-      <h1>Adega do Bahia & Espaços</h1>
+      <a href="index.html">
+        <img src="imagens/logo.jpg" alt="Logo Adega do Bahia & Espaços" class="logo-desktop">
+        <img src="imagens/logo-versao-mobile.jpg" alt="Logo Adega do Bahia & Espaços" class="logo-mobile">
+      </a>
     </div>
-    <nav>
+
+    <!-- Navegação Desktop -->
+    <nav class="nav-desktop" aria-label="Navegação Principal">
       <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="salao.html">Salão de Festas</a></li>
+        <li><a href="praia.html">Casa em Itanhaém</a></li>
+        <li><a href="adega.html" class="active">Adega</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botão Menu Mobile -->
+    <button class="menu-btn" id="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-menu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <!-- Menu Mobile -->
+    <nav class="nav-menu" id="nav-menu" aria-label="Navegação Mobile">
+      <ul class="ul-list2">
         <li><a href="index.html">Início</a></li>
         <li><a href="salao.html">Salão de Festas</a></li>
         <li><a href="praia.html">Casa em Itanhaém</a></li>
@@ -26,43 +64,47 @@
     </nav>
   </header>
 
-  <main class="conteudo-pagina">
-  <h2>Adega do Bahia</h2>
-  <p class="subtitulo">Bebidas geladas, atendimento de qualidade e os melhores preços da região!</p>
+  <!-- Conteúdo Principal -->
+  <main class="conteudo-pagina" id="conteudo-principal">
+    <h1>Adega do Bahia</h1>
+    <p class="subtitulo">Bebidas geladas, atendimento de qualidade e os melhores preços da região!</p>
 
-  <!-- Galeria de Fotos / Encarte -->
-  <section class="galerya">
-      <img src="imagens/imagem-daadega.jpeg" alt="Interior da adega">
-      <img src="imagens/imagem-narguile.jpeg" alt="Garrafas de vinho">
-      <img src="imagens/imagem-combo.jpeg" alt="Kits de bebidas">
+    <!-- Galeria de Fotos / Encarte -->
+    <section class="galerya" aria-label="Fotos do espaço e produtos da adega">
+      <img src="imagens/imagem-daadega.jpeg" alt="Atendimento e interior da Adega do Bahia na Vila Santa Teresinha">
+      <img src="imagens/imagem-narguile.jpeg" alt="Produtos de tabacaria, essências e acessórios de narguilé">
+      <img src="imagens/imagem-combo.jpeg" alt="Combos de bebidas geladas e doses especiais">
     </section>
 
-  <section class="detalhes">
-    <h3>Tudo o que você precisa para o seu evento ou final de semana:</h3>
-    <ul>
-      <li><strong>Bebidas Geladas:</strong> Cervejas, destilados, whiskies, vinhos e espumantes</li>
-      <li><strong>Combos & Copos:</strong> Caipirinhas de frutas, doses especiais e gelo de coco</li>
-      <li><strong>Tabacaria & Narguilé:</strong> Essências, carvão de narguilé e acessórios</li>
-      <li><strong>Churrasco:</strong> Carvão para churrasco e encomendas para eventos</li>
-      <li><strong>Retirada no Local:</strong> Atendimento direto na loja (não fazemos entregas)</li>
-    </ul>
+    <!-- Detalhes dos Produtos e Serviços -->
+    <section class="detalhes" aria-label="Variedade de produtos da adega">
+      <h2>Tudo o que você precisa para o seu evento ou final de semana:</h2>
+      <ul>
+        <li><strong>Bebidas Geladas:</strong> Cervejas, destilados, whiskies, vinhos e espumantes</li>
+        <li><strong>Combos & Copos:</strong> Caipirinhas de frutas, doses especiais e gelo de coco</li>
+        <li><strong>Tabacaria & Narguilé:</strong> Essências, carvão de narguilé e acessórios</li>
+        <li><strong>Churrasco:</strong> Carvão para churrasco e encomendas para eventos</li>
+        <li><strong>Retirada no Local:</strong> Atendimento direto na loja (não fazemos entregas)</li>
+      </ul>
 
-    <div class="cta-box">
-      <h3>Endereço para Retirada:</h3>
-      <p style="font-weight: bold; margin-bottom: 0.5rem;">📍 R. Quatro de Julho, 55 - Vila Santa Teresinha</p>
-      <a href="https://wa.me/5511970519161?text=Olá!+Gostaria+de+consultar+os+produtos+disponíveis+na+Adega" target="_blank" class="btn btn-whats">Falar com a Adega no WhatsApp</a>
-      <p style="margin-top: 1rem; font-size: 0.9rem;">
-        <a href="https://maps.google.com/?q=Rua+Quatro+de+Julho+55+Vila+Santa+Teresinha" target="_blank" style="color: var(--primary-color); font-weight: bold;">Abrir no Google Maps</a>
-      </p>
-    </div>
-  </section>
-</main>
+      <!-- Localização e Contato -->
+      <div class="cta-box">
+        <h2>Endereço para Retirada:</h2>
+        <p style="font-weight: bold; margin-bottom: 0.5rem;">📍 R. Quatro de Julho, 55 - Vila Santa Teresinha</p>
+        <a href="https://wa.me/5511970519161?text=Olá!+Gostaria+de+consultar+os+produtos+disponíveis+na+Adega" target="_blank" rel="noopener noreferrer" class="btn btn-whats">Falar com a Adega no WhatsApp</a>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+          <a href="https://maps.google.com/?q=Rua+Quatro+de+Julho+55+Vila+Santa+Teresinha" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); font-weight: bold;">Abrir no Google Maps</a>
+        </p>
+      </div>
+    </section>
+  </main>
 
+  <!-- Rodapé -->
   <footer>
     <p>&copy; 2026 Adega do Bahia & Espaços - Todos os direitos reservados.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="javascript.js"></script>
 
 </body>
 

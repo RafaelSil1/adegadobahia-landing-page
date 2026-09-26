@@ -1,6 +1,10 @@
 /* ==========================================================================
    1. CONFIGURAÇÕES GERAIS E VARIÁVEIS
    ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,9 +13,9 @@
 }
 
 :root {
-  --primary-color: #5c1d24;      /* Tom de vinho elegante */
+  --primary-color: #57141c;     /* Tom de vinho elegante */
   --primary-hover: #401318;
-  --secondary-color: #25d366;    /* Verde WhatsApp */
+  --secondary-color: #25d366;   /* Verde WhatsApp */
   --secondary-hover: #1ebc57;
   --bg-color: #f8f9fa;
   --card-bg: #ffffff;
@@ -30,23 +34,50 @@ body {
   min-height: 100vh;
 }
 
+/* Classe utilitária de acessibilidade e SEO (H1 oculto) */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 /* ==========================================================================
    2. CABEÇALHO E NAVEGAÇÃO
    ========================================================================== */
 header {
   background-color: var(--primary-color);
-  color: #ffffff;
-  padding: 1.2rem 2rem;
+  padding: 0.4rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 10;
 }
 
-header .logo h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-desktop {
+  display: block;
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-mobile {
+  display: none;
+  height: 60px;
+  width: auto;
+  object-fit: contain;
 }
 
 nav ul {
@@ -69,13 +100,35 @@ nav a.active {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Banner Mosaico Dividido em 3 */
+/* Botões do Menu Mobile (padrão oculto no desktop) */
+.nav-menu {
+  display: none;
+}
+
+.menu-btn {
+  cursor: pointer;
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+}
+
+.menu-btn i {
+  color: #ffffff;
+  font-size: 1.8rem;
+}
+
+/* ==========================================================================
+   3. BANNER PRINCIPAL (HERO MOSAICO)
+   ========================================================================== */
 .hero-mosaico {
   position: relative;
   display: flex;
   height: 450px;
   width: 100%;
   overflow: hidden;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .mosaico-item {
@@ -83,8 +136,9 @@ nav a.active {
   background-size: cover;
   background-position: center;
   position: relative;
-  transition: flex 0.5s ease;
+  transition: flex 0.5s ease, filter 0.5s ease;
   filter: brightness(0.75);
+  will-change: flex;
 }
 
 .mosaico-item:hover {
@@ -99,8 +153,8 @@ nav a.active {
   transform: translateX(-50%);
   color: #ffffff;
   font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px 14px;
+  background-color: rgba(0, 0, 0, 0.65);
+  padding: 6px 16px;
   border-radius: 20px;
   font-size: 0.9rem;
   white-space: nowrap;
@@ -115,13 +169,14 @@ nav a.active {
   color: #ffffff;
   pointer-events: none;
   z-index: 2;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   width: 90%;
 }
 
 .hero-overlay h2 {
   font-size: 2.2rem;
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .hero-overlay p {
@@ -129,14 +184,14 @@ nav a.active {
 }
 
 /* ==========================================================================
-   4. GRID DE CARTÕES (HOME)
+   4. GRID DE CARTÕES (INÍCIO)
    ========================================================================== */
 .servicos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   max-width: 1100px;
-  margin: 0 auto 3rem auto;
+  margin: 2.5rem auto 3rem auto;
   padding: 0 1.5rem;
   width: 100%;
 }
@@ -149,6 +204,7 @@ nav a.active {
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
 }
 
 .card:hover {
@@ -185,6 +241,7 @@ nav a.active {
   width: 100%;
 }
 
+.conteudo-pagina h1,
 .conteudo-pagina h2 {
   font-size: 2rem;
   color: var(--primary-color);
@@ -197,16 +254,16 @@ nav a.active {
   margin-bottom: 2rem;
 }
 
+/* Slider / Carrossel de Fotos */
 .galeria {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.2rem;
   margin-bottom: 2rem;
-  touch-action: pan-y; /* Melhora a sensibilidade do gesto no celular */
+  touch-action: pan-y;
 }
 
-/* Esconde todas as imagens por padrão */
 .galeria img {
   display: none;
   width: 280px;
@@ -214,51 +271,51 @@ nav a.active {
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  /* Transição suave de opacidade e movimento */
   opacity: 0;
   transform: scale(0.95);
   transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: opacity, transform;
 }
 
-/* Mostra apenas as imagens ativas com animação */
 .galeria img.ativa {
   display: block;
   opacity: 1;
   transform: scale(1);
 }
 
-
-
-/* --- BOTÕES PERSONALIZADOS --- */
-#prev, #next {
+/* Botões de Navegação do Carrossel */
+#prev,
+#next {
   width: 48px;
   height: 48px;
-  border-radius: 50%; /* Torna os botões redondos */
+  border-radius: 50%;
   border: none;
-  background-color: var( --primary-color); /* Azul moderno */
+  background-color: var(--primary-color);
   color: #ffffff;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(87, 20, 28, 0.3);
   transition: all 0.3s ease;
+  will-change: transform;
 }
 
-/* Efeito ao passar o mouse por cima dos botões */
-#prev:hover, #next:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px); /* Leve elevação */
-  box-shadow: 0 6px 14px rgba(0, 86, 179, 0.4);
+#prev:hover,
+#next:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(64, 19, 24, 0.4);
 }
 
-/* Efeito ao clicar nos botões */
-#prev:active, #next:active {
+#prev:active,
+#next:active {
   transform: translateY(0) scale(0.95);
 }
 
+/* Galeria em Grade (Salão e Adega) */
 .galerya {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -274,7 +331,7 @@ nav a.active {
   box-shadow: var(--shadow);
 }
 
-/* Lista de Detalhes */
+/* Bloco de Detalhes */
 .detalhes {
   background-color: var(--card-bg);
   padding: 2rem;
@@ -282,9 +339,12 @@ nav a.active {
   box-shadow: var(--shadow);
 }
 
+.detalhes h2,
 .detalhes h3 {
+  margin-top: 1rem;
   margin-bottom: 1rem;
   color: var(--primary-color);
+  font-size: 1.4rem;
 }
 
 .detalhes ul {
@@ -293,10 +353,10 @@ nav a.active {
 }
 
 .detalhes li {
-  padding: 0.5rem 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid #eeeeee;
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: 1.6rem;
 }
 
 .detalhes li::before {
@@ -307,15 +367,16 @@ nav a.active {
   font-weight: bold;
 }
 
-/* Caixas de Chamada (CTA) */
+/* Caixas de Chamada para Ação (CTA) */
 .cta-box {
   background-color: #f1f3f5;
   padding: 1.5rem;
   border-radius: var(--border-radius);
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
 }
 
+.cta-box h2,
 .cta-box h3 {
   font-size: 1.1rem;
   margin-bottom: 1rem;
@@ -334,7 +395,7 @@ nav a.active {
   font-weight: 600;
   border-radius: 6px;
   text-align: center;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   margin: 0 1.2rem 1.2rem 1.2rem;
 }
 
@@ -380,4 +441,3 @@ footer {
 .whatsapp-btn:hover {
   background-color: var(--secondary-hover);
 }
-

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rafaelsil1.github.io/adegadobahia-landing-page/sitemap.xml

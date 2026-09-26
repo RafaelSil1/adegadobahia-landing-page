@@ -4,9 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adega do Bahia & Espaços | Festas, Lazer e Vinhos</title>
+  
+  <!-- SEO Básico -->
+  <title>Adega do Bahia & Espaços | Salão de Festas, Casa em Itanhaém e Adega</title>
+  <meta name="description" content="Espaços para eventos na Vila Santa Teresinha (Zona Leste SP), casa de praia com piscina em Itanhaém e adega com bebidas selecionadas. Reserve já!">
+  <meta name="robots" content="index, follow">
+  <!-- Subsitua 'https://www.adegadobahia.com.br' pelo seu domínio final quando tiver -->
+  <link rel="canonical" href="https://rafaelsil1.github.io/adegadobahia-landing-page/">
+
+  <!-- Favicon -->
   <link rel="shortcut icon" href="imagens/favicon.jpeg" type="image/x-icon">
-  <link rel="shortcut icon" href="imagens/favicon.jpeg" type="image/x-icon">
+
+  <!-- Open Graph / Redes Sociais e WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Adega do Bahia & Espaços | Festas, Lazer e Vinhos">
+  <meta property="og:description" content="Salão de festas na Zona Leste, casa de praia com piscina em Itanhaém e adega completa para seu evento.">
+  <meta property="og:image" content="imagens/logo.jpg">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Font Awesome & CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="responsividade.css">
 </head>
@@ -16,10 +33,30 @@
   <!-- Cabeçalho e Navegação -->
   <header>
     <div class="logo">
-      <h1>Adega do Bahia & Espaços</h1>
+      <a href="index.html">
+        <img src="imagens/logo.jpg" alt="Logo Adega do Bahia & Espaços" class="logo-desktop">
+        <img src="imagens/logo-versao-mobile.jpg" alt="Logo Adega do Bahia & Espaços" class="logo-mobile">
+      </a>
     </div>
-    <nav>
+
+    <!-- Navegação Desktop -->
+    <nav class="nav-desktop" aria-label="Navegação Principal">
       <ul>
+        <li><a href="index.html" class="active">Início</a></li>
+        <li><a href="salao.html">Salão de Festas</a></li>
+        <li><a href="praia.html">Casa em Itanhaém</a></li>
+        <li><a href="adega.html">Adega</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botão Menu Mobile -->
+    <button class="menu-btn" id="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Menu Mobile -->
+    <nav class="nav-menu" id="nav-menu" aria-label="Navegação Mobile">
+      <ul class="ul-list2">
         <li><a href="index.html" class="active">Início</a></li>
         <li><a href="salao.html">Salão de Festas</a></li>
         <li><a href="praia.html">Casa em Itanhaém</a></li>
@@ -28,16 +65,20 @@
     </nav>
   </header>
 
-  
+  <!-- H1 Principal Oculto Visualmente (Crucial para SEO) -->
+  <h1 class="sr-only" style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;">
+    Adega do Bahia e Espaços de Lazer
+  </h1>
+
   <!-- Banner Principal em Mosaico -->
-  <section class="hero-mosaico">
-    <div class="mosaico-item" style="background-image: url('imagens/salao.jpeg');">
+  <section class="hero-mosaico" aria-label="Apresentação dos Espaços">
+    <div class="mosaico-item" style="background-image: url('imagens/salao.jpeg');" role="img" aria-label="Salão de Festas do Bahia">
       <span>Salão de Festas</span>
     </div>
-    <div class="mosaico-item" style="background-image: url('imagens/casadepraia.jpeg');">
+    <div class="mosaico-item" style="background-image: url('imagens/casadepraia.jpeg');" role="img" aria-label="Casa de Praia em Itanhaém">
       <span>Casa em Itanhaém</span>
     </div>
-    <div class="mosaico-item" style="background-image: url('imagens/adega.jpeg');">
+    <div class="mosaico-item" style="background-image: url('imagens/adega.jpeg');" role="img" aria-label="Adega do Bahia">
       <span>Adega do Bahia</span>
     </div>
     <div class="hero-overlay">
@@ -46,32 +87,28 @@
     </div>
   </section>
 
-<br><br>
-
-  <!-- Cartões dos Serviços -->
-  <main class="servicos-grid">
+  <!-- Conteúdo Principal / Cartões dos Serviços -->
+  <main class="servicos-grid" id="conteudo-principal">
 
     <!-- Cartão Salão -->
     <article class="card">
-      <img src="imagens/img-salaofesta.jpeg" alt="Salão de Festas Zona Leste">
+      <img src="imagens/img-salaofesta.jpeg" alt="Salão de Festas para alugar na Vila Santa Teresinha, Zona Leste SP">
       <h3>Salão de Festas</h3>
-      <p>Localizado na Vila Santa Teresinha (Zona Leste - SP). O espaço ideal para aniversários, noivados e reuniões
-        familiares.</p>
+      <p>Localizado na Vila Santa Teresinha (Zona Leste - SP). O espaço ideal para aniversários, noivados e reuniões familiares.</p>
       <a href="salao.html" class="btn">Ver estrutura e fotos</a>
     </article>
 
     <!-- Cartão Casa de Praia -->
     <article class="card">
-      <img src="imagens/imagem-praia.jpeg" alt="Casa de Praia em Itanhaém">
+      <img src="imagens/imagem-praia.jpeg" alt="Casa de praia para temporada com piscina privativa em Itanhaém">
       <h3>Casa na Praia - Itanhaém</h3>
-      <p>A apenas 700m da praia! Piscina privativa, churrasqueira, 3 quartos amplos e garagem. O refúgio ideal para seu
-        descanso.</p>
+      <p>A apenas 700m da praia! Piscina privativa, churrasqueira, 3 quartos amplos e garagem. O refúgio ideal para seu descanso.</p>
       <a href="praia.html" class="btn">Ver detalhes e fotos</a>
     </article>
 
     <!-- Cartão Adega -->
     <article class="card">
-      <img src="imagens/imagem-adega.jpeg" alt="Adega do Bahia">
+      <img src="imagens/imagem-adega.jpeg" alt="Adega do Bahia com bebidas e vinhos selecionados">
       <h3>Adega do Bahia</h3>
       <p>Vinhos selecionados e bebidas para acompanhar seu evento ou para apreciar em casa.</p>
       <a href="adega.html" class="btn">Conhecer a Adega</a>
@@ -82,10 +119,10 @@
   <!-- Rodapé -->
   <footer>
     <p>&copy; 2026 Adega do Bahia & Espaços - Todos os direitos reservados.</p>
-    <a href="https://wa.me/5511988083419" target="_blank" class="whatsapp-btn">Falar pelo WhatsApp</a>
+    <a href="https://wa.me/5511988083419" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">Falar pelo WhatsApp</a>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="javascript.js"></script>
 </body>
 
 </html>

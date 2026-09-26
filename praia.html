@@ -1,22 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Casa de Praia em Itanhaém | Adega do Bahia & Espaços</title>
+  
+  <!-- SEO Básico -->
+  <title>Casa de Praia para Temporada em Itanhaém com Piscina | Adega do Bahia</title>
+  <meta name="description" content="Aluguel de casa de praia em Itanhaém para temporada. Apenas 700m da praia, com piscina privativa, cascata, churrasqueira, 3 quartos e garagem. Reserve já!">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rafaelsil1.github.io/adegadobahia-landing-page/praia.html">
+
+  <!-- Favicon -->
   <link rel="shortcut icon" href="imagens/favicon.jpeg" type="image/x-icon">
+
+  <!-- Open Graph / Redes Sociais e WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Casa de Praia para Temporada em Itanhaém com Piscina | Adega do Bahia">
+  <meta property="og:description" content="Casa para temporada a 700m da praia com piscina privativa, churrasqueira e 3 quartos amplos em Itanhaém.">
+  <meta property="og:image" content="imagens/imagem-piscina.jpeg">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Font Awesome & CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="responsividade.css">
 </head>
+
 <body>
 
   <!-- Cabeçalho e Navegação -->
   <header>
     <div class="logo">
-      <h1>Adega do Bahia & Espaços</h1>
+      <a href="index.html">
+        <img src="imagens/logo.jpg" alt="Logo Adega do Bahia & Espaços" class="logo-desktop">
+        <img src="imagens/logo-versao-mobile.jpg" alt="Logo Adega do Bahia & Espaços" class="logo-mobile">
+      </a>
     </div>
-    <nav>
+
+    <!-- Navegação Desktop -->
+    <nav class="nav-desktop" aria-label="Navegação Principal">
       <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="salao.html">Salão de Festas</a></li>
+        <li><a href="praia.html" class="active">Casa em Itanhaém</a></li>
+        <li><a href="adega.html">Adega</a></li>
+      </ul>
+    </nav>
+
+    <!-- Botão Menu Mobile -->
+    <button class="menu-btn" id="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-menu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <!-- Menu Mobile -->
+    <nav class="nav-menu" id="nav-menu" aria-label="Navegação Mobile">
+      <ul class="ul-list2">
         <li><a href="index.html">Início</a></li>
         <li><a href="salao.html">Salão de Festas</a></li>
         <li><a href="praia.html" class="active">Casa em Itanhaém</a></li>
@@ -26,39 +65,38 @@
   </header>
 
   <!-- Conteúdo Principal -->
-  <main class="conteudo-pagina">
-    <h2>Sua próxima parada: Itanhaém! 🏖️</h2>
+  <main class="conteudo-pagina" id="conteudo-principal">
+    <h1>Sua próxima parada: Casa de Praia em Itanhaém! 🏖️</h1>
     <p class="subtitulo">O lugar ideal para o seu descanso a apenas 700m da praia!</p>
 
-    <!-- Galeria de Fotos -->
-   <section class="galeria">
-  <button id="prev"> &lt; </button>
+    <!-- Galeria de Fotos / Slider -->
+    <section class="galeria" aria-label="Galeria de fotos da casa de praia em Itanhaém">
+      <button id="prev" aria-label="Foto anterior">&lt;</button>
 
-  <img src="imagens/imagem-laser.jpeg" alt="Área de churrasqueira" class="ajuste">
-  <img src="imagens/imagem-piscina.jpeg" alt="Piscina da casa em Itanhaém com iluminação noturna">
-  <img src="imagens/imagem-quarto.jpeg" alt="Interior aconchegante da casa">
-  <img src="imagens/imagem-sala.jpeg" alt="Área de churrasqueira">
-  <img src="imagens/imagem-quarto3.jpeg" alt="Piscina da casa em Itanhaém com iluminação noturna">
-  <img src="imagens/imagem-quarto2.jpeg" alt="Interior aconchegante da casa">
-  <img src="imagens/img-banheiro.jpg" alt="Área de churrasqueira">
+      <img src="imagens/imagem-laser.jpeg" alt="Área de lazer externa da casa em Itanhaém" class="ajuste">
+      <img src="imagens/imagem-piscina.jpeg" alt="Piscina privativa com iluminação noturna e cascata">
+      <img src="imagens/imagem-quarto.jpeg" alt="Quarto principal espaçoso e arejado da casa em Itanhaém">
+      <img src="imagens/imagem-sala.jpeg" alt="Sala de estar aconchegante da casa de praia">
+      <img src="imagens/imagem-quarto3.jpeg" alt="Segundo quarto amplo acomodando a família">
+      <img src="imagens/imagem-quarto2.jpeg" alt="Terceiro quarto da casa de temporada">
+      <img src="imagens/img-banheiro.jpg" alt="Banheiro social completo e higienizado">
+      <img src="imagens/imagem-corredor-de-fora.jpeg" alt="Corredor externo e espaço de circulação">
+      <img src="imagens/imagem-piscina1.jpeg" alt="Piscina privativa vista de outro ângulo sob luz do dia">
 
-  <img src="imagens/imagem-corredor-de-fora.jpeg" alt="Piscina da casa em Itanhaém com iluminação noturna">
-  <img src="imagens/imagem-piscina1.jpeg" alt="Interior aconchegante da casa">
-
-  <div class="indicadores" id="indicadores"></div>
-  <button id="next"> &gt; </button>
-</section>
+      <div class="indicadores" id="indicadores"></div>
+      <button id="next" aria-label="Próxima foto">&gt;</button>
+    </section>
 
     <!-- Estrutura e Lazer -->
-    <section class="detalhes">
-      <h3>🏊 Lazer Privativo</h3>
+    <section class="detalhes" aria-label="Estrutura e acomodações do imóvel">
+      <h2>🏊 Lazer Privativo</h2>
       <ul>
         <li>Piscina refrescante com cascata e iluminação</li>
         <li>Espaço com churrasqueira para aproveitar bons momentos com tranquilidade</li>
         <li>Apenas 700 metros da praia</li>
       </ul>
 
-      <h3 style="margin-top: 1.5rem;">🏠 Estrutura Completa para sua Estadia</h3>
+      <h2>🏠 Estrutura Completa para sua Estadia</h2>
       <ul>
         <li><strong>3 quartos</strong> amplos e arejados</li>
         <li><strong>Sala de estar</strong> aconchegante</li>
@@ -67,10 +105,10 @@
         <li><strong>Garagem</strong> com ótimo espaço</li>
       </ul>
 
-      <!-- Caixas de Chamada (CTA) com o WhatsApp Real -->
+      <!-- Caixas de Chamada (CTA) -->
       <div class="cta-box">
         <h3>📅 Consulte disponibilidade e valores para finais de semana e feriados:</h3>
-        <a href="https://wa.me/5511988083419?text=Olá!+Gostaria+de+consultar+a+disponibilidade+e+valores+da+Casa+de+Praia+em+Itanhaém" target="_blank" class="btn btn-whats">Falar pelo WhatsApp</a>
+        <a href="https://wa.me/5511988083419?text=Olá!+Gostaria+de+consultar+a+disponibilidade+e+valores+da+Casa+de+Praia+em+Itanhaém" target="_blank" rel="noopener noreferrer" class="btn btn-whats">Falar pelo WhatsApp</a>
       </div>
     </section>
   </main>
@@ -80,7 +118,7 @@
     <p>&copy; 2026 Adega do Bahia & Espaços - Todos os direitos reservados.</p>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="carrosel.js"></script>
+  <script src="javascript.js"></script>
 </body>
+
 </html>
