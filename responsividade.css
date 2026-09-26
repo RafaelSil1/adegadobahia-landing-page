@@ -120,6 +120,10 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    /* SÓ bloqueia o toque no celular/tablet (até 768px) */
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .mosaico-item {
